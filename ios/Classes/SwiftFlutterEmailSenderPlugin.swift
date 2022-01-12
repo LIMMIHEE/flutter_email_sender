@@ -33,7 +33,7 @@ public class SwiftFlutterEmailSenderPlugin: NSObject, FlutterPlugin {
 
         if MFMailComposeViewController.canSendMail() {
             let mailComposerVC = MFMailComposeViewController()
-            mailComposerVC.mailComposeDelegate = self
+     
 
             mailComposerVC.setToRecipients(email.recipients)
             if let subject = email.subject {
@@ -43,7 +43,7 @@ public class SwiftFlutterEmailSenderPlugin: NSObject, FlutterPlugin {
             mailComposerVC.setBccRecipients(email.bcc)
             
             if let body = email.body {
-                mailComposerVC.setMessageBody(body, isHTML: email.isHTML ?? false)
+                mailComposerVC.setMessageBody(body, isHTML: false)
             }
 
             if let attachmentPaths = email.attachmentPaths {
@@ -57,7 +57,7 @@ public class SwiftFlutterEmailSenderPlugin: NSObject, FlutterPlugin {
                     }
                 }
             }
-
+            mailComposerVC.mailComposeDelegate = self
             viewController.present(mailComposerVC,
                                    animated: true,
                                    completion: { result(nil) }
