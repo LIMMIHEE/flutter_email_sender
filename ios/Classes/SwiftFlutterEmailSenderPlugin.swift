@@ -92,17 +92,9 @@ public class SwiftFlutterEmailSenderPlugin: NSObject, FlutterPlugin {
 }
 
 extension SwiftFlutterEmailSenderPlugin : MFMailComposeViewControllerDelegate {
-   extension SwiftFlutterEmailSenderPlugin : MFMailComposeViewControllerDelegate {
-//    public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-//        controller.dismiss(animated: true, completion: nil)
-//    }
-//    
-    @objc(mailComposeController:didFinishWithResult:error:)
-        func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult,error: NSError?) {
-            controller.dismiss(animated: true)
-        }
-}
-
+    public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
 }
 
 struct Email {
