@@ -33,7 +33,7 @@ public class SwiftFlutterEmailSenderPlugin: NSObject, FlutterPlugin {
 
         if MFMailComposeViewController.canSendMail() {
             let mailComposerVC = MFMailComposeViewController()
-     
+                 mailComposerVC.mailComposeDelegate = self
 
             mailComposerVC.setToRecipients(email.recipients)
             if let subject = email.subject {
@@ -57,7 +57,7 @@ public class SwiftFlutterEmailSenderPlugin: NSObject, FlutterPlugin {
                     }
                 }
             }
-            mailComposerVC.mailComposeDelegate = self
+
             viewController.present(mailComposerVC,
                                    animated: true,
                                    completion: { result(nil) }
@@ -93,6 +93,17 @@ public class SwiftFlutterEmailSenderPlugin: NSObject, FlutterPlugin {
 
 extension SwiftFlutterEmailSenderPlugin : MFMailComposeViewControllerDelegate {
     public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+       
+        switch result {
+        case .sent:
+            print("Email sent")
+        case .saved:
+            print("Draft saved")
+        case .cancelled:
+            print("Email cancelled")
+        case  .failed:
+            print("Email failed")
+        }
         controller.dismiss(animated: true, completion: nil)
     }
 }
